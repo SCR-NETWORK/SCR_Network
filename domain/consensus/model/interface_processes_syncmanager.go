@@ -1,0 +1,17 @@
+package model
+
+import "github.com/SCR-NETWORK/SCR_Network/domain/consensus/model/externalapi"
+
+// SyncManager exposes functions to support sync between SCR-NETWORK nodes
+// SyncManager exposes functions to support sync between SCR_Network nodes
+type SyncManager interface {
+	GetHashesBetween(stagingArea *StagingArea, lowHash, highHash *externalapi.DomainHash, maxBlocks uint64) (
+		hashes []*externalapi.DomainHash, actualHighHash *externalapi.DomainHash, err error)
+	GetAnticone(stagingArea *StagingArea, blockHash, contextHash *externalapi.DomainHash, maxBlocks uint64) (hashes []*externalapi.DomainHash, err error)
+	GetMissingBlockBodyHashes(stagingArea *StagingArea, highHash *externalapi.DomainHash) ([]*externalapi.DomainHash, error)
+	CreateBlockLocator(stagingArea *StagingArea, lowHash, highHash *externalapi.DomainHash, limit uint32) (
+		externalapi.BlockLocator, error)
+	CreateHeadersSelectedChainBlockLocator(stagingArea *StagingArea, lowHash, highHash *externalapi.DomainHash) (
+		externalapi.BlockLocator, error)
+	GetSyncInfo(stagingArea *StagingArea) (*externalapi.SyncInfo, error)
+}

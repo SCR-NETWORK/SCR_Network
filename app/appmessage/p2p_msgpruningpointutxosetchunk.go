@@ -1,0 +1,40 @@
+package appmessage
+
+import "github.com/SCR-NETWORK/SCR_Network/domain/consensus/model/externalapi"
+
+<<<<<<< HEAD
+// MsgPruningPointUTXOSetChunk represents a SCR PruningPointUTXOSetChunk message
+=======
+// MsgPruningPointUTXOSetChunk represents a SCR PruningPointUTXOSetChunk message
+>>>>>>> 0e8ed786da4e31df71edebffb326da64b0a6c3b4
+type MsgPruningPointUTXOSetChunk struct {
+	baseMessage
+	OutpointAndUTXOEntryPairs []*OutpointAndUTXOEntryPair
+}
+
+// Command returns the protocol command string for the message
+func (msg *MsgPruningPointUTXOSetChunk) Command() MessageCommand {
+	return CmdPruningPointUTXOSetChunk
+}
+
+// NewMsgPruningPointUTXOSetChunk returns a new MsgPruningPointUTXOSetChunk.
+func NewMsgPruningPointUTXOSetChunk(outpointAndUTXOEntryPairs []*OutpointAndUTXOEntryPair) *MsgPruningPointUTXOSetChunk {
+	return &MsgPruningPointUTXOSetChunk{
+		OutpointAndUTXOEntryPairs: outpointAndUTXOEntryPairs,
+	}
+}
+
+// OutpointAndUTXOEntryPair is an outpoint along with its
+// respective UTXO entry
+type OutpointAndUTXOEntryPair struct {
+	Outpoint  *Outpoint
+	UTXOEntry *UTXOEntry
+}
+
+// UTXOEntry houses details about an individual transaction output in a UTXO
+type UTXOEntry struct {
+	Amount          uint64
+	ScriptPublicKey *externalapi.ScriptPublicKey
+	BlockDAAScore   uint64
+	IsCoinbase      bool
+}
